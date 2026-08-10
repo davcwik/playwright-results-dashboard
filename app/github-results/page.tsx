@@ -5,11 +5,11 @@ export const revalidate = 0;
 
 const TARGET_WORKFLOWS = [
   { dbWorkflowName: 'api-critical', displayName: 'Playwright Api Critical' },
-  { dbWorkflowName: 'desktop-critical', displayName: 'Playwright_Desktop_Critical' },
-  { dbWorkflowName: 'mobile-critical', displayName: 'Playwright_Mobile_Critical' },
-  { dbWorkflowName: 'api-non-critical', displayName: 'Playwright_Api_Non_Critical' },
-  { dbWorkflowName: 'desktop-non-critical', displayName: 'Playwright_Desktop_Non_Critical' },
-  { dbWorkflowName: 'mobile-non-critical', displayName: 'Playwright_Mobile_Non_Critical' },
+  { dbWorkflowName: 'desktop-critical', displayName: 'Playwright Desktop Critical' },
+  { dbWorkflowName: 'mobile-critical', displayName: 'Playwright Mobile Critical' },
+  { dbWorkflowName: 'api-non-critical', displayName: 'Playwright Api Non-Critical' },
+  { dbWorkflowName: 'desktop-non-critical', displayName: 'Playwright Desktop Non-Critical' },
+  { dbWorkflowName: 'mobile-non-critical', displayName: 'Playwright Mobile Non-Critical' },
 ];
 
 async function getLatestTestRuns(): Promise<TestRun[]> {
@@ -170,21 +170,11 @@ export default async function GithubResultsPage() {
                   <a
                     href="#"
                     className="flex-1 text-[0.85rem] font-semibold no-underline text-[#3498db] bg-[#f0f7fc] py-2 px-1 rounded transition-all duration-200 text-center hover:text-white hover:bg-[#2980b9]"
-                  >
-                    Playwright Report
-                  </a>
+                  >Playwright Report</a>
                   <a
                     href="#"
                     className="flex-1 text-[0.85rem] font-semibold no-underline text-[#3498db] bg-[#f0f7fc] py-2 px-1 rounded transition-all duration-200 text-center hover:text-white hover:bg-[#2980b9]"
-                  >
-                    Failures
-                  </a>
-                  <a
-                    href="#"
-                    className="flex-1 text-[0.85rem] font-semibold no-underline text-[#3498db] bg-[#f0f7fc] py-2 px-1 rounded transition-all duration-200 text-center hover:text-white hover:bg-[#2980b9]"
-                  >
-                    GitHub Run
-                  </a>
+                  >GitHub Build</a>
                 </div>
               </div>
             </div>
