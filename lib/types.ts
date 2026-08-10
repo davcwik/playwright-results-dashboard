@@ -2,7 +2,7 @@
 export interface TestRun {
   id: number;
   browser: string;
-  github_job_name: string;
+  github_workflow_name: string;
   github_build_number: number;
   playwright_tags: string;
   environment: string;
