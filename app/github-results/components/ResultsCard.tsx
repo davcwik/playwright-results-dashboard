@@ -1,7 +1,6 @@
 import { TestRun } from '@/lib/types';
 import styles from '../github-results.module.css';
 
-const GH_PAGES_BASE_URL = 'https://davcwik.github.io/playwright-results-dashboard/reports';
 
 interface ResultsCardProps {
   displayName: string;
@@ -74,7 +73,7 @@ function formatPacificTime(utcIsoString: string | undefined): string {
  */
 function getPlaywrightReportURL(github_workflow_name?: string, github_build_number?: number, ): string | null {
   if (!github_workflow_name || !github_build_number) return null;
-  return `https://davcwik.github.io/playwright-results-dashboard/playwright-reports/${github_workflow_name}/${github_build_number}/index.html`;
+  return `https://davcwik.github.io/bird-world-playwright-js/playwright-reports/${github_workflow_name}/${github_build_number}/index.html`;
 }
 
 /**
