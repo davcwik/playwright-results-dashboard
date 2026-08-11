@@ -1,7 +1,6 @@
 import { TestRun } from '@/lib/types';
 import styles from '../github-results.module.css';
 
-const GH_PAGES_BASE_URL = 'https://davcwik.github.io/playwright-results-dashboard/reports';
 
 interface ResultsCardProps {
   displayName: string;
