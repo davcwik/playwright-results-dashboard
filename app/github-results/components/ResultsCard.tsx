@@ -69,12 +69,20 @@ function formatPacificTime(utcIsoString: string | undefined): string {
 }
 
 /**
+ * Get the Github Pages url for a build's Playwright report
+ * Construct URL only if workflow_name and build_number are not undefined, else set reportUrl to null
+ */
+function getPlaywrightReportURL(github_workflow_name?: string, github_build_number?: number, ): string | null {
+  if (!github_workflow_name || !github_build_number) return null;
+  return `https://davcwik.github.io/playwright-results-dashboard/playwright-reports/${github_workflow_name}/${github_build_number}/index.html`;
+}
+
+/**
  * Generate the HTML for the Result Card and populate with test result data and report links
  */
 export function ResultsCard({ displayName, run }: ResultsCardProps) {
-  const reportUrl = run?.github_build_number && run?.github_workflow_name
-    ? `${GH_PAGES_BASE_URL}/${run.github_workflow_name}/${run.github_build_number}/index.html`
-    : null;
+
+  const pwReportUrl = getPlaywrightReportURL(run?.github_workflow_name, run?.github_build_number);
 
   return (
     <div className={styles.cardContainer}>
@@ -127,22 +135,8 @@ export function ResultsCard({ displayName, run }: ResultsCardProps) {
       {/* Action Links */}
       <div className="pt-2">
         <div className="flex gap-2 w-full">
-          {reportUrl ? (
-            <a
-              href={reportUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.btnAction}
-            >
-              Playwright Report
-            </a>
-          ) : (
-            <span className={styles.btnDisabled}>No Report</span>
-          )}
-
-          <a href="#" className={styles.btnAction}>
-            GitHub Build
-          </a>
+          {pwReportUrl ? (<a href={pwReportUrl} target="_blank" rel="noopener noreferrer" className={styles.btnAction}>Playwright Report</a>) : (<span className={styles.btnDisabled}>No Report</span>)}
+          <a href="#" className={styles.btnAction}>GitHub Build</a>
         </div>
       </div>
     </div>
