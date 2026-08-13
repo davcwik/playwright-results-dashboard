@@ -80,7 +80,7 @@ function getPlaywrightReportUrl(github_workflow_name?: string, github_run_number
  * Get the Github Run Details url for the run (ex. https://github.com/davcwik/bird-world-playwright-js/actions/runs/31655363456)
  * If run_id is undefined, return null
  */
-function getRunDetailsUrl(github_run_id?: number): string | null {
+function getRunDetailsUrl(github_run_id?: string): string | null {
   if (!github_run_id) return null;
   return 'https://github.com/davcwik/bird-world-playwright-js/actions/runs/${github_run_id}';
 }
@@ -159,7 +159,7 @@ export function ResultsCard({ displayName, run }: ResultsCardProps) {
       <div className="pt-2">
         <div className="flex gap-2 w-full">
           {pwReportUrl ? (<a href={pwReportUrl} target="_blank" rel="noopener noreferrer" className={styles.btnAction}>Playwright Report</a>) : (<span className={styles.btnDisabled}>No Report</span>)}
-          {pwReportUrl ? (<a href={pwReportUrl} target="_blank" rel="noopener noreferrer" className={styles.btnAction}>Github Run Details</a>) : (<span className={styles.btnDisabled}>No Report</span>)}
+          {runDetailsUrl ? (<a href={runDetailsUrl} target="_blank" rel="noopener noreferrer" className={styles.btnAction}>Github Run Details</a>) : (<span className={styles.btnDisabled}>No Report</span>)}
         </div>
       </div>
     </div>

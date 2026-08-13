@@ -12,7 +12,7 @@ export interface TestRun {
   overall_result: 'PASSED' | 'FAILED';
   started_at_utc: string;
   execution_time_ms: number;
-  github_run_id: number;
+  github_run_id: string;
 }
 
 
