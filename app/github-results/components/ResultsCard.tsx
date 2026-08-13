@@ -82,7 +82,7 @@ function getPlaywrightReportUrl(github_workflow_name?: string, github_run_number
  */
 function getRunDetailsUrl(github_run_id?: string): string | null {
   if (!github_run_id) return null;
-  return 'https://github.com/davcwik/bird-world-playwright-js/actions/runs/${github_run_id}';
+  return `https://github.com/davcwik/bird-world-playwright-js/actions/runs/${github_run_id}`;
 }
 
 /**
