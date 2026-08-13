@@ -42,7 +42,7 @@ async function getLatestTestRuns(): Promise<TestRun[]> {
         execution_time_ms,
         github_run_id
        FROM test_runs 
-       ORDER BY started_at_utc DESC,
+       ORDER BY started_at_utc DESC
        LIMIT 50`
     );
     return result.rows;
