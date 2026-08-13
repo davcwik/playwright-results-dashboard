@@ -31,7 +31,7 @@ async function getLatestTestRuns(): Promise<TestRun[]> {
         id, 
         browser, 
         github_workflow_name, 
-        github_build_number, 
+        github_run_number, 
         playwright_tags, 
         environment, 
         total_tests, 

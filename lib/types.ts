@@ -3,7 +3,7 @@ export interface TestRun {
   id: number;
   browser: string;
   github_workflow_name: string;
-  github_build_number: number;
+  github_run_number: number;
   playwright_tags: string;
   environment: string;
   total_tests: number;

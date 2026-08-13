@@ -71,9 +71,9 @@ function formatPacificTime(utcIsoString: string | undefined): string {
  * Get the Github Pages url for a build's Playwright report
  * Construct URL only if workflow_name and build_number are not undefined, else set reportUrl to null
  */
-function getPlaywrightReportURL(github_workflow_name?: string, github_build_number?: number, ): string | null {
-  if (!github_workflow_name || !github_build_number) return null;
-  return `https://davcwik.github.io/bird-world-playwright-js/playwright-reports/${github_workflow_name}/${github_build_number}/index.html`;
+function getPlaywrightReportURL(github_workflow_name?: string, github_run_number?: number, ): string | null {
+  if (!github_workflow_name || !github_run_number) return null;
+  return `https://davcwik.github.io/bird-world-playwright-js/playwright-reports/${github_workflow_name}/${github_run_number}/index.html`;
 }
 
 /**
@@ -91,7 +91,7 @@ const getStatusClass = (result: string) => {
 export function ResultsCard({ displayName, run }: ResultsCardProps) {
 
   // Playwright Report button link
-  const pwReportUrl = getPlaywrightReportURL(run?.github_workflow_name, run?.github_build_number);
+  const pwReportUrl = getPlaywrightReportURL(run?.github_workflow_name, run?.github_run_number);
 
   // Overall Result "X% Passed" text color logic (ex. "100% Passed" will be green text)
   const resultText = run
@@ -117,8 +117,8 @@ export function ResultsCard({ displayName, run }: ResultsCardProps) {
             </span>
           </div>
           <div className={styles.metricRow}>
-            <span className={styles.metricLabel}>Build Number:</span>
-            <span className={styles.metricValue}>{run?.github_build_number ?? 'N/A'}</span>
+            <span className={styles.metricLabel}>Run Number:</span>
+            <span className={styles.metricValue}>{run?.github_run_number ?? 'N/A'}</span>
           </div>
           <div className={styles.metricRow}>
             <span className={styles.metricLabel}>Duration:</span>
