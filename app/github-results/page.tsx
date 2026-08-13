@@ -39,7 +39,7 @@ async function getLatestTestRuns(): Promise<TestRun[]> {
         failed_tests, 
         overall_result, 
         TO_CHAR(started_at_utc, 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS started_at_utc_iso, 
-        execution_time_ms ,
+        execution_time_ms,
         github_run_id
        FROM test_runs 
        ORDER BY started_at_utc DESC,
