@@ -1,6 +1,7 @@
 import { query } from '@/lib/db';
 import { TestRun } from '@/lib/types';
 import { ResultsCard } from './components/ResultsCard'; // Updated import
+import type { Metadata } from "next";
 
 // disable static caching and render the page dynamically for every single request
 export const revalidate = 0;
@@ -14,6 +15,11 @@ const TARGET_WORKFLOWS = [
   { dbWorkflowName: 'desktop-non-critical', displayName: 'Playwright Desktop Non-Critical' },
   { dbWorkflowName: 'mobile-non-critical', displayName: 'Playwright Mobile Non-Critical' },
 ];
+
+export const metadata: Metadata = {
+  title: "Github Test Results Dashboard",
+  description: "Playwright test results from Github test runs",
+};
 
 /**
  * get the 50 most recent test run results

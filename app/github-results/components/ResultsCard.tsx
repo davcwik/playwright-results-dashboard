@@ -77,11 +77,27 @@ function getPlaywrightReportURL(github_workflow_name?: string, github_build_numb
 }
 
 /**
+ * Apply text color based on the Overall Result "X% Passed" text
+ */
+const getStatusClass = (result: string) => {
+  if (result === '100% Passed') return styles.statusSuccess; // green
+  if (result === 'No Tests Run') return styles.statusMuted; // grey
+  return styles.statusFail; // red
+};
+
+/**
  * Generate the HTML for the Result Card and populate with test result data and report links
  */
 export function ResultsCard({ displayName, run }: ResultsCardProps) {
 
+  // Playwright Report button link
   const pwReportUrl = getPlaywrightReportURL(run?.github_workflow_name, run?.github_build_number);
+
+  // Overall Result "X% Passed" text color logic (ex. "100% Passed" will be green text)
+  const resultText = run
+  ? calculatePassPercentage(run.passed_tests, run.total_tests)
+  : 'No Tests Run';
+  const statusClass = getStatusClass(resultText);
 
   return (
     <div className={styles.cardContainer}>
@@ -92,9 +108,7 @@ export function ResultsCard({ displayName, run }: ResultsCardProps) {
         <div className={styles.cardSectionDivider}>
           <div className={styles.metricRow}>
             <span className={styles.metricLabel}>Overall Result:</span>
-            <span className={styles.metricValue}>
-              {run ? calculatePassPercentage(run.passed_tests, run.total_tests) : 'No Tests Run'}
-            </span>
+            <span className={`${styles.metricValue} ${statusClass}`}>{resultText}</span>
           </div>
           <div className={styles.metricRow}>
             <span className={styles.metricLabel}>Started At (PST):</span>
