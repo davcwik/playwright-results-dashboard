@@ -68,12 +68,21 @@ function formatPacificTime(utcIsoString: string | undefined): string {
 }
 
 /**
- * Get the Github Pages url for a build's Playwright report
- * Construct URL only if workflow_name and build_number are not undefined, else set reportUrl to null
+ * Get the Github Pages url for the run's Playwright report
+ * If workflow_name or run_number are undefined, return null
  */
-function getPlaywrightReportURL(github_workflow_name?: string, github_run_number?: number, ): string | null {
+function getPlaywrightReportUrl(github_workflow_name?: string, github_run_number?: number, ): string | null {
   if (!github_workflow_name || !github_run_number) return null;
   return `https://davcwik.github.io/bird-world-playwright-js/playwright-reports/${github_workflow_name}/${github_run_number}/index.html`;
+}
+
+/**
+ * Get the Github Run Details url for the run (ex. https://github.com/davcwik/bird-world-playwright-js/actions/runs/31655363456)
+ * If run_id is undefined, return null
+ */
+function getRunDetailsUrl(github_run_id?: number): string | null {
+  if (!github_run_id) return null;
+  return 'https://github.com/davcwik/bird-world-playwright-js/actions/runs/${github_run_id}';
 }
 
 /**
@@ -90,8 +99,9 @@ const getStatusClass = (result: string) => {
  */
 export function ResultsCard({ displayName, run }: ResultsCardProps) {
 
-  // Playwright Report button link
-  const pwReportUrl = getPlaywrightReportURL(run?.github_workflow_name, run?.github_run_number);
+  // Playwright Report link
+  const pwReportUrl = getPlaywrightReportUrl(run?.github_workflow_name, run?.github_run_number);
+  const runDetailsUrl = getRunDetailsUrl(run?.github_run_id);
 
   // Overall Result "X% Passed" text color logic (ex. "100% Passed" will be green text)
   const resultText = run
@@ -149,7 +159,7 @@ export function ResultsCard({ displayName, run }: ResultsCardProps) {
       <div className="pt-2">
         <div className="flex gap-2 w-full">
           {pwReportUrl ? (<a href={pwReportUrl} target="_blank" rel="noopener noreferrer" className={styles.btnAction}>Playwright Report</a>) : (<span className={styles.btnDisabled}>No Report</span>)}
-          <a href="#" className={styles.btnAction}>GitHub Build</a>
+          {pwReportUrl ? (<a href={pwReportUrl} target="_blank" rel="noopener noreferrer" className={styles.btnAction}>Github Run Details</a>) : (<span className={styles.btnDisabled}>No Report</span>)}
         </div>
       </div>
     </div>
