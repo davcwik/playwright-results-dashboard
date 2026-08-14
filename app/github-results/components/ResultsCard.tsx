@@ -68,47 +68,56 @@ function formatPacificTime(utcIsoString: string | undefined): string {
 }
 
 /**
- * Get the Github Pages url for the run's Playwright report
- * If workflow_name or run_number are undefined, return null
+ * Get the Github Pages URL for the run's Playwright report
+ * @var wf_name - Github workflow name (ex. desktop-critical)
+ * @var run_num - Github run number (ex. 65)
+ * @return the url or null
  */
-function getPlaywrightReportUrl(github_workflow_name?: string, github_run_number?: number, ): string | null {
-  if (!github_workflow_name || !github_run_number) return null;
-  return `https://davcwik.github.io/bird-world-playwright-js/playwright-reports/${github_workflow_name}/${github_run_number}/index.html`;
+function getPlaywrightReportUrl(wf_name?: string, run_num?: number, ): string | null {
+  if (!wf_name || !run_num) return null; 
+  return `https://davcwik.github.io/bird-world-playwright-js/playwright-reports/${wf_name}/${run_num}/index.html`;
 }
 
 /**
- * Get the Github Run Details url for the run (ex. https://github.com/davcwik/bird-world-playwright-js/actions/runs/31655363456)
- * If run_id is undefined, return null
+ * Get the URL for the Github Run Details Page (ex. https://github.com/davcwik/bird-world-playwright-js/actions/runs/31655363456)
+ * @var run_id - Github run id (ex. 31747031193)
+ * @return the url or null
  */
-function getRunDetailsUrl(github_run_id?: string): string | null {
-  if (!github_run_id) return null;
-  return `https://github.com/davcwik/bird-world-playwright-js/actions/runs/${github_run_id}`;
+function getRunDetailsUrl(run_id?: string): string | null {
+  if (!run_id) return null;
+  return `https://github.com/davcwik/bird-world-playwright-js/actions/runs/${run_id}`;
 }
 
 /**
- * Apply text color based on the Overall Result "X% Passed" text
+ * Apply css styling rule based on the Overall Result "X% Passed" text
+ * @var text - the Overall Results text (ex. 50% Passed)
+ * @return the corresponding styling rule
  */
-const getStatusClass = (result: string) => {
-  if (result === '100% Passed') return styles.statusSuccess; // green
-  if (result === 'No Tests Run') return styles.statusMuted; // grey
-  return styles.statusFail; // red
+const getStatusClass = (text: string) => {
+  if (text === '100% Passed') return styles.statusSuccess;
+  if (text === 'No Tests Run') return styles.statusNeutral;
+  return styles.statusFail;
 };
 
 /**
  * Generate the HTML for the Result Card and populate with test result data and report links
+ * @var displayName - the workflow name for the card title (ex. desktop-critical)
+ * @var run - a data object with key value pairs that contains the test run result data
+ * @return HTML
  */
 export function ResultsCard({ displayName, run }: ResultsCardProps) {
 
-  // Playwright Report link
+  // Report links
   const pwReportUrl = getPlaywrightReportUrl(run?.github_workflow_name, run?.github_run_number);
   const runDetailsUrl = getRunDetailsUrl(run?.github_run_id);
 
-  // Overall Result "X% Passed" text color logic (ex. "100% Passed" will be green text)
+  // Apply styling rule for Overall Result "X% Passed" text
   const resultText = run
   ? calculatePassPercentage(run.passed_tests, run.total_tests)
   : 'No Tests Run';
   const statusClass = getStatusClass(resultText);
 
+  // HTML
   return (
     <div className={styles.cardContainer}>
       <div>

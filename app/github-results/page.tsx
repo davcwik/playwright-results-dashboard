@@ -1,12 +1,15 @@
 import { query } from '@/lib/db';
 import { TestRun } from '@/lib/types';
-import { ResultsCard } from './components/ResultsCard'; // Updated import
-import type { Metadata } from "next";
+import { ResultsCard } from './components/ResultsCard';
 
 // disable static caching and render the page dynamically for every single request
 export const revalidate = 0;
 
-// list of workflows to populate the Result Cards on the page
+/**
+ * An array that maps the Github workflow name (ex. desktop-critical) to its display name that will be displayed on the results card
+ * A results card will be created on the Results Dashboard Page for each of these records in the order they are listed
+ * If you want to add an additional card to the Dashboard, just add a record here
+ */
 const TARGET_WORKFLOWS = [
   { dbWorkflowName: 'api-critical', displayName: 'Playwright Api Critical' },
   { dbWorkflowName: 'desktop-critical', displayName: 'Playwright Desktop Critical' },
@@ -16,13 +19,9 @@ const TARGET_WORKFLOWS = [
   { dbWorkflowName: 'mobile-non-critical', displayName: 'Playwright Mobile Non-Critical' },
 ];
 
-export const metadata: Metadata = {
-  title: "Github Test Results Dashboard",
-  description: "Playwright test results from Github test runs",
-};
-
 /**
- * get the 50 most recent test run results
+ * Get the 50 most recent test run results sorted newest to oldest
+ * @return an array of objects representing raw DB rows
  */
 async function getLatestTestRuns(): Promise<TestRun[]> {
   try {
@@ -54,10 +53,12 @@ async function getLatestTestRuns(): Promise<TestRun[]> {
 
 
 /**
- * Generate Github Results Page HTML and populate with data
+ * Generate Github Results Page HTML
  */
 export default async function GithubResultsPage() {
-  const testRuns = await getLatestTestRuns();
+
+  // Get the most recent test result data for the current workflow run
+  const testRuns = await getLatestTestRuns(); // an array of objects representing raw DB rows
 
   const getLatestRunForWorkflow = (dbWorkflowName: string): TestRun | undefined => {
     return testRuns.find(
@@ -68,13 +69,13 @@ export default async function GithubResultsPage() {
   return (
     <main className="min-h-screen bg-slate-100 text-gray-800 p-6 font-sans">
       <header className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-1 tracking-tight">
-          Github Test Results Dashboard
-        </h1>
+        <h1 className="text-3xl font-bold text-gray-800 mb-1 tracking-tight">Playwright Test Results Dashboard</h1>
         <p className="text-sm text-gray-500">Environment: Production</p>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+
+        {/* Perform a loop for each record in TARGET_WORKFLOWS and get its latest test run data and generate its Results Card HTML */}
         {TARGET_WORKFLOWS.map((wf) => {
           const run = getLatestRunForWorkflow(wf.dbWorkflowName);
 
@@ -85,7 +86,9 @@ export default async function GithubResultsPage() {
               run={run}
             />
           );
-        })}
+
+        })} // end loop
+
       </div>
     </main>
   );

@@ -47,5 +47,5 @@
 }
 
 .statusNeutral {
-  color: grey; /* ex. No Tests Run */
+  color: inherit; /* use the global default */
 }
