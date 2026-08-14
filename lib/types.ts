@@ -3,7 +3,7 @@ export interface TestRun {
   id: number;
   browser: string;
   github_workflow_name: string;
-  github_build_number: number;
+  github_run_number: number;
   playwright_tags: string;
   environment: string;
   total_tests: number;
@@ -12,6 +12,7 @@ export interface TestRun {
   overall_result: 'PASSED' | 'FAILED';
   started_at_utc: string;
   execution_time_ms: number;
+  github_run_id: string;
 }
 
 
