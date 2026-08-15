@@ -94,7 +94,7 @@ function getRunDetailsUrl(run_id?: string): string | null {
  * @return the corresponding styling rule
  */
 const getStatusClass = (text: string) => {
-  if (text === '100% Passed') return styles.statusSuccess;
+  if (text === '100% Pass') return styles.statusSuccess;
   if (text === 'No Tests Run') return styles.statusNeutral;
   return styles.statusFail;
 };
