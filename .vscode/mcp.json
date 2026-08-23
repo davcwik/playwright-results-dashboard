@@ -6,10 +6,6 @@
     },
     "local-postgres": {
       "command": "node",
-      "": {
-          "flag_1": "Securely loads database credentials into memory from .env.local",
-          "flag_2": "Launches the secure, community-maintained YawLabs server package"
-        },
       "args": [
           "--env-file=.env.local",
           "node_modules/@yawlabs/postgres-mcp/dist/index.js"
