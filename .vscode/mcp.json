@@ -1,0 +1,15 @@
+{
+  "servers": {
+    "next-devtools": {
+      "command": "npx",
+      "args": ["-y", "next-devtools-mcp@latest"]
+    },
+    "local-postgres": {
+      "command": "node",
+      "args": [
+          "--env-file=.env.local",
+          "node_modules/@yawlabs/postgres-mcp/dist/index.js"
+      ]
+    }
+  }
+}

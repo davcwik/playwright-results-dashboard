@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### Overview:
+This repository contains a custom Test Results Dashboard Page that displays the latest Playwright UI and API test run results data retrieved from a PostgreSQL database.
 
-## Getting Started
+The test results are from a separate project, where Github workflows launch the test runs and write the results data to the database (see repo [here](https://github.com/davcwik/bird-world-playwright-js)).
 
-First, run the development server:
+### Technical Details:
+* Web Framework: Next.js (TypeScript)
+* Database: Postgres (SQL)
+* AI Tools: MCP Servers and custom AI Agent Skills (see AI Tools below for details)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Highlights:
+* Responsive Design: The Dashboard grid layout will dynamically adjust as needed to fit various browser widths
+* Test Result Details: The results card for each test run result displays test run metadata such as Github workflow name and build number, start date and time, test run duration and overall Pass percentage. The number of Total, Passed and Failed tests are also displayed.
+* Additional Reports: Each results card also contains links to a full Playwright Test Run report and a Github Run Details Page
+* Security: no .env files with sensitive data (ex. configuration details, credentials, etc) are saved in the repository
+* To view screenshots of the Dashboard Page, navigate to the "demo" directory in this repo. (see here).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### AI Tools ###
+MCP Servers for Next.js and Postgres are included (see .vscode/mcp.json). Also various custom Skills have been created, including utility skills to verify the MCP Server connections are up and running. See the .github/skills directory.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Note: As part of the Postgres MCP Server configuration, Yawlabs must be installed locally in the project root for it to work. Run `npm install @yawlabs/postgres-mcp` to install it.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Next.js ###
+To start the dev server: npm run dev
+To stop: Ctrl-c
 
-## Learn More
+### Postgres ###
+Installation was performed with Home Brew.
+To start: brew services start postgresql@16
+To stop: brew services stop postgresql@16
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
