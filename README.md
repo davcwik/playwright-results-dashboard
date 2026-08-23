@@ -21,11 +21,12 @@ MCP Servers for Next.js and Postgres are included (see .vscode/mcp.json). Also v
 Note: As part of the Postgres MCP Server configuration, Yawlabs must be installed locally in the project root for it to work. Run `npm install @yawlabs/postgres-mcp` to install it.
 
 ### Next.js ###
-To start the dev server: npm run dev
-To stop: Ctrl-c
+The local dev environment can be viewed at: http://localhost:3000/github-results
+* To start the dev server: npm run dev
+* To stop: Ctrl-C
 
 ### Postgres ###
 Installation was performed with Home Brew.
-To start: brew services start postgresql@16
-To stop: brew services stop postgresql@16
+* To start: brew services start postgresql@16
+* To stop: brew services stop postgresql@16
 
