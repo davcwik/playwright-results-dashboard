@@ -6,7 +6,7 @@ The test results are from a separate project, where Github workflows launch the 
 ### Technical Details:
 * Web Framework: Next.js (TypeScript)
 * Database: Postgres
-* AI Tools: MCP Servers for Next.js and Postgres are included. Various custom Skills have been created - see the .github/skills directory.
+* AI Tools: MCP Servers and custom AI Agent Skills (see AI Tools below for details)
 
 ### Highlights:
 * Responsive Design: The Dashboard grid layout will dynamically adjust as needed to fit various browser widths
@@ -14,6 +14,11 @@ The test results are from a separate project, where Github workflows launch the 
 * Additional Reports: Each results card also contains links to a full Playwright Test Run report and a Github Run Details Page
 * Security: no .env files with sensitive data (ex. configuration details, credentials, etc) are saved in the repository
 * To view screenshots of the Dashboard Page, navigate to the "demo" directory in this repo. (see here).
+
+### AI Tools ###
+MCP Servers for Next.js and Postgres are included (see .vscode/mcp.json). Also various custom Skills have been created, including utility skills to verify the MCP Server connections are up and running. See the .github/skills directory.
+
+Note: As part of the Postgres MCP Server configuration, Yawlabs must be installed locally in the project root for it to work. Run `npm install @yawlabs/postgres-mcp` to install it.
 
 
 

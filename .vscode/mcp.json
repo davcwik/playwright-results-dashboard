@@ -6,9 +6,13 @@
     },
     "local-postgres": {
       "command": "node",
+      "": {
+          "flag_1": "Securely loads database credentials into memory from .env.local",
+          "flag_2": "Launches the secure, community-maintained YawLabs server package"
+        },
       "args": [
-          "--env-file=.env.local", // specify the environment file to use for DB config variables
-          "node_modules/@yawlabs/postgres-mcp/dist/index.js" // yawlabs must be installed in the project for this to work (run `npm install @yawlabs/postgres-mcp` to install it)
+          "--env-file=.env.local",
+          "node_modules/@yawlabs/postgres-mcp/dist/index.js"
       ]
     }
   }
