@@ -5,7 +5,7 @@ The test results are from a separate project, where Github workflows launch the 
 
 ### Technical Details:
 * Web Framework: Next.js (TypeScript)
-* Database: Postgres
+* Database: Postgres (SQL)
 * AI Tools: MCP Servers and custom AI Agent Skills (see AI Tools below for details)
 
 ### Highlights:
@@ -20,5 +20,12 @@ MCP Servers for Next.js and Postgres are included (see .vscode/mcp.json). Also v
 
 Note: As part of the Postgres MCP Server configuration, Yawlabs must be installed locally in the project root for it to work. Run `npm install @yawlabs/postgres-mcp` to install it.
 
+### Next.js ###
+To start the dev server: npm run dev
+To stop: Ctrl-c
 
+### Postgres ###
+Installation was performed with Home Brew.
+To start: brew services start postgresql@16
+To stop: brew services stop postgresql@16
 
