@@ -16,17 +16,16 @@ The test results are from a separate project, where Github workflows launch the 
 * To view screenshots of the Dashboard Page, navigate to the "demo" directory in this repo. (see [here](https://github.com/davcwik/playwright-results-dashboard/tree/main/demo)).
 
 ### AI Tools ###
-MCP Servers for Next.js and Postgres are included (see .vscode/mcp.json). Also various custom Skills have been created, including utility skills to verify the MCP Server connections are up and running. See the .github/skills directory.
+MCP Servers for Next.js and Postgres are included (see .vscode/mcp.json). Also custom Skills have been created such as utilities that verify the MCP Server connections are up and running. See .github/skills directory.
 
-Note: As part of the Postgres MCP Server configuration, Yawlabs must be installed locally in the project root for it to work. Run `npm install @yawlabs/postgres-mcp` to install it.
+Note: For the Postgres MCP Server configuration, Yawlabs must be installed locally for it to work. Run `npm install @yawlabs/postgres-mcp` in the project root to install it.
 
 ### Next.js ###
 The local dev environment can be viewed at: http://localhost:3000
-* To start the dev server: npm run dev
-* To stop: Ctrl-C
+* To start the dev server: `npm run dev`
+* To stop: `Ctrl-C`
 
 ### Postgres ###
 Installation was performed with Home Brew.
-* To start: brew services start postgresql@16
-* To stop: brew services stop postgresql@16
-
+* To start the database server: `brew services start postgresql@16`
+* To stop: `brew services stop postgresql@16`
